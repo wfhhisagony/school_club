@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+        <meta name="renderer" content="webkit"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta http-equiv="Cache-Control" content="no-transform"/>
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <title>个人信息编辑</title>
+        <!--引入layui-->
+        <link rel="stylesheet" th:href="@{~/layui/css/layui.css}">
+        <!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!--<link th:href="@{/admin/plugins/toggles/toggles.css}" rel="stylesheet"/>-->
+    <body>
+
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>个人信息编辑</legend>
+        </fieldset>
+        <blockquote class="layui-elem-quote layui-text">
+            修改个人信息
+        </blockquote>
+        <!--不通过form表单的action和method属性发送请求，因为那样不能处理返回结果-->
+        <!--可以通过action和method来转到下一个页面-->
+        <!--<form class="layui-form" th:action="@{/index}" method="get">-->
+        <form class="layui-form" action="" lay-filter="userInfo">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="请输入姓名" name="user_name" lay-verify="required" lay-reqtext="姓名不能为空" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">学号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="请输入学号" name="user_number" lay-verify="required|number" lay-reqtext="学号不能为空" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <!--0 男  1 女-->
+                    <input type="radio" name="gender" value="0" title="男" checked="">
+                    <input type="radio" name="gender" value="1" title="女">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">专业班级</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="例如人工智能191" name="class_name" lay-verify="required" lay-reqtext="班级不能为空" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">手机</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" placeholder="请输入正确的11位手机号" name="telephone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">QQ</label>
+                    <div class="layui-input-inline">
+                        <input disabled="" type="text" placeholder="请输入正确的QQ号码" name="qq" lay-verify="required|number" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所在部门</label>
+                <div class="layui-input-inline">
+                    <select disabled="" name="department_id" lay-filter="department_name">
+                        <option value="" selected=""></option>
+                        <option value="1">所有部</option>
+                        <option value="2">组织部</option>
+                        <option value="3">宣传部</option>
+                        <option value="4">外联部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-inline">
+                    <input disabled="" type="text" name="position_name" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">注册时间</label>
+                <div class="layui-input-inline">
+                    <input disabled="" type="text" name="creat_time" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">个人简介</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="我们都想多了解你一下，介绍一下自己呗" class="layui-textarea" name="profile"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="register_button">保存修改</button>
+                    <button class="layui-btn layui-btn-primary" id="Back-To-Index">返回首页</button>
+                </div>
+            </div>
+        </form>
+
+
+        <!--使用layui-->
+        <script th:src="@{~/layui/layui.js}" charset="utf-8"></script>
+        <script src="//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
+        <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+        <script type="text/javascript">
+            var thedata = "";
+            var $$ = layui.jquery;
+            var info_url = "http://localhost:8080/member/self"
+            // 通过layui封装的Ajax发送请求，获取数据存入thedata
+            $$.ajax({
+                type: 'post',
+                contentType: "application/json;charset=utf-8",
+                dataType:'json',
+                async: false, // 同步，因为之后还想要重定位到另一个页面
+                url: info_url,
+                success: function(res){
+                    console.log(res)
+                    if(res.code==0){
+                        thedata = res.data;
+                    }
+                    else{
+                        layer.alert("获取信息失败")
+                    }
+                }
+            })
+            thedata.creat_time = layui.util.toDateString(thedata.creat_time, "yyyy-MM-dd HH:mm:ss");
+            layui.use(['form', 'layedit', 'laydate'], function(){
+                var form = layui.form
+                    ,layer = layui.layer
+                    ,layedit = layui.layedit
+                    ,laydate = layui.laydate;
+
+                var save_url = "http://localhost:8080/member/self/save";
+                var src_url = "http://localhost:8080/index";
+                //日期
+                laydate.render({
+                    elem: '#date'
+                });
+                laydate.render({
+                    elem: '#date1'
+                });
+
+                //创建一个编辑器
+                var editIndex = layedit.build('LAY_demo_editor');
+
+                //自定义验证规则
+                form.verify({
+                    title: function(value){
+                        if(value.length < 2){
+                            return '姓名至少2个字';
+                        }
+                    }
+                    ,pass: [
+                        /^[\S]{6,18}$/
+                        ,'密码必须6到18位，且不能出现空格'
+                    ]
+                    ,content: function(value){
+                        layedit.sync(editIndex);
+                    }
+                });
+                // 为form表单初始赋值
+                console.log("userInfo"+ thedata);
+                form.val('userInfo',
+                    thedata
+                )
+
+                // 返回首页
+                layui.$('#Back-To-Index').on('click', function(){
+                   window.location.href = "/index";
+                   // 必须要加的一句话，否则无法跳转
+                   return false;
+                });
+
+                //监听提交
+                form.on('submit(register_button)', function(data){
+                    //调试时
+                    // layer.alert(JSON.stringify(data.field), {
+                    //     title: '最终的提交信息'
+                    // })
+                    // 通过layui封装的Ajax发送请求
+                    $$.ajax({
+                        type: 'post',
+                        contentType: "application/json;charset=utf-8",
+                        dataType:'json',
+                        async: false, // 同步，因为之后还想要重定位到另一个页面
+                        url: save_url,
+                        data: JSON.stringify(data.field),
+                        success: function(res){
+                            console.log(res)
+                            if(res.success==true){
+                                layer.alert("保存成功");
+                                // window.location.href = src_url;
+                                // window.parent.location.reload();
+                            }
+                            else{
+                                layer.alert("保存失败");
+                            }
+                        }
+                    })
+                });
+            });
+            function index_page(){
+              window.location.href = "/";
+            };
+        </script>
+    </body>
+</html>

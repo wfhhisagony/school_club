@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="header::header('事件查看',null)"></div>
+<body>
+    <div class="main-content common-page clearfix">
+        <div class="categorys-item">
+            <h1 class="common-title">
+                <th:block th:unless="${session.loginUser==null}">
+                        你好,[[${session.loginUser.user_name}]]同学
+                </th:block>
+                <th:block th:if="${session.loginUser==null}">
+                    事件
+                </th:block>
+            </h1>
+            <th:block th:if="${commons.is_empty(events)}">
+                <div>
+                    <p>抱歉，还没有相关活动.</p>
+                </div>
+            </th:block>
+            <th:block th:unless="${commons.is_empty(events)}">
+                <div class="post-lists">
+                    <div class="post-lists-body">
+                        <th:block th:each="event : ${events}">
+                            <div class="post-list-item">
+                                <div class="post-list-item-container ">
+                                    <div class="item-label ">
+                                        <h1 class="post-title" itemprop="name headline">
+                                            <a href="javascript:void(0)"  th:onclick="signup([[${event.event_id}]],[[${session.loginUser}]])">
+                                                <span th:text="${event.title}"></span>
+                                            </a>
+                                        </h1>
+                                        <div class="item-content" th:text="${event.detail}" />
+                                        <div class="item-content" th:text="${event.start_end_time}" />
+                                        <div class="item-meta clearfix">
+                                            <div th:class="'item-meta-ico '+${commons.show_icon(event.type_flag)} "
+                                                 th:style="'background: url('+@{/user/img/bg-ico.png}+') no-repeat;background-size: 40px auto;'"></div>
+                                            <div class="item-meta-date">发布于<th:block th:text="${#calendars.format(#calendars.createForTimeZone(#calendars.year(event.update_time), #calendars.month(event.update_time), #calendars.day(event.update_time), #calendars.hour(event.update_time), #calendars.minute(event.update_time),'UTC'), 'yyyy-MM-dd HH:mm')}"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <script th:src="@{//cdn.bootcss.com/jquery/2.2.3/jquery.min.js}"></script>
+    <script th:src="@{//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <!--使用swal弹出框的两个包 sweetalert2-->
+    <script th:src="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.js}"></script>
+    <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
+    <script th:src="@{~/admin/js/jquery.app.js}"></script>
+    <script th:src="@{~/admin/js/base.js}"></script>
+        <script type="text/javascript">
+            /*<![CDATA[*/
+            var tale = new $.tale();
+            function signup(event_id, login_user) {
+                if(login_user==null) {
+                    console.log(login_user)
+                    return;
+                }
+                const user_id = login_user.id;
+                tale.alertConfirm2({
+                    title:'确定报名该活动吗?',
+                    then: function () {
+                        tale.post({
+                            url : '/event/detail/signup',
+                            data: {event_id: event_id, user_id:user_id},
+                            success: function (result) {
+                                if(result && result.success){
+                                    tale.alertOkAndReload('报名成功');
+                                } else {
+                                    tale.alertError(result.msg || '报名失败');
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            /*]]>*/
+        </script>
+</body>
+<div th:replace="themes/default/footer::footer"></div>
+</html>

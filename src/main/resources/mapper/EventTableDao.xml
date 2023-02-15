@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.EventTableDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.EventTable">
+    <id column="event_id" jdbcType="INTEGER" property="event_id" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="start_end_time" jdbcType="VARCHAR" property="start_end_time" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="finish_flag" jdbcType="TINYINT" property="finish_flag" />
+    <result column="checked_y" jdbcType="VARCHAR" property="checked_y" />
+    <result column="checked_n" jdbcType="VARCHAR" property="checked_n" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type_flag" jdbcType="TINYINT" property="type_flag" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    event_id, place, start_end_time, detail, finish_flag, checked_y, checked_n, title,
+    type_flag, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from event_table
+    where event_id = #{event_id,jdbcType=INTEGER}
+  </select>
+    <select id="getEventTableList" resultType="com.example.demo.entity.EventTable">
+      select * from event_table
+    </select>
+    <select id="getGoingEventTableList" resultType="com.example.demo.entity.EventTable">
+      select *
+      from event_table
+      where finish_flag = 0
+    </select>
+  <!--使用bind加 # 防止sql注入-->
+  <select id="queryByKeyWords" resultType="com.example.demo.entity.EventTable">
+    <bind name="pattern" value="'%'+ title + '%'  "/>
+    select *
+    from event_table
+    where title like #{pattern};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from event_table
+    where event_id = #{event_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="event_id" keyProperty="event_id" parameterType="com.example.demo.entity.EventTable" useGeneratedKeys="true">
+    insert into event_table (place, start_end_time, detail,
+      finish_flag, checked_y, checked_n,
+      title, type_flag, update_time
+      )
+    values (#{place,jdbcType=VARCHAR}, #{start_end_time,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR},
+      #{finish_flag,jdbcType=TINYINT}, #{checked_y,jdbcType=VARCHAR}, #{checked_n,jdbcType=VARCHAR},
+      #{title,jdbcType=VARCHAR}, #{type_flag,jdbcType=TINYINT}, #{update_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="event_id" keyProperty="event_id" parameterType="com.example.demo.entity.EventTable" useGeneratedKeys="true">
+    insert into event_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="place != null">
+        place,
+      </if>
+      <if test="start_end_time != null">
+        start_end_time,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="finish_flag != null">
+        finish_flag,
+      </if>
+      <if test="checked_y != null">
+        checked_y,
+      </if>
+      <if test="checked_n != null">
+        checked_n,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="type_flag != null">
+        type_flag,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="start_end_time != null">
+        #{start_end_time,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="finish_flag != null">
+        #{finish_flag,jdbcType=TINYINT},
+      </if>
+      <if test="checked_y != null">
+        #{checked_y,jdbcType=VARCHAR},
+      </if>
+      <if test="checked_n != null">
+        #{checked_n,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type_flag != null">
+        #{type_flag,jdbcType=TINYINT},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.EventTable">
+    update event_table
+    <set>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="start_end_time != null">
+        start_end_time = #{start_end_time,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="finish_flag != null">
+        finish_flag = #{finish_flag,jdbcType=TINYINT},
+      </if>
+      <if test="checked_y != null">
+        checked_y = #{checked_y,jdbcType=VARCHAR},
+      </if>
+      <if test="checked_n != null">
+        checked_n = #{checked_n,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type_flag != null">
+        type_flag = #{type_flag,jdbcType=TINYINT},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where event_id = #{event_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.EventTable">
+    update event_table
+    set place = #{place,jdbcType=VARCHAR},
+      start_end_time = #{start_end_time,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      finish_flag = #{finish_flag,jdbcType=TINYINT},
+      checked_y = #{checked_y,jdbcType=VARCHAR},
+      checked_n = #{checked_n,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      type_flag = #{type_flag,jdbcType=TINYINT},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where event_id = #{event_id,jdbcType=INTEGER}
+  </update>
+</mapper>

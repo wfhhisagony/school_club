@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.JoinTableDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.JoinTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="class_name" jdbcType="VARCHAR" property="class_name" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="department_id" jdbcType="INTEGER" property="department_id" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, profile, `class_name`, `name`, `number`, telephone, department_id, qq, `password`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from join_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from join_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.demo.entity.JoinTable" useGeneratedKeys="true">
+    insert into join_table (profile, `class_name`, `name`,
+      `number`, telephone, department_id,
+      qq, `password`)
+    values (#{profile,jdbcType=VARCHAR}, #{class_name,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{number,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{department_id,jdbcType=INTEGER},
+      #{qq,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.demo.entity.JoinTable" useGeneratedKeys="true">
+    insert into join_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="class_name != null">
+        `class_name`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="department_id != null">
+        department_id,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="class_name != null">
+        #{class_name,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        #{department_id,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.JoinTable">
+    update join_table
+    <set>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="class_name != null">
+        `class_name` = #{class_name,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        department_id = #{department_id,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.JoinTable">
+    update join_table
+    set profile = #{profile,jdbcType=VARCHAR},
+      `class_name` = #{class_name,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `number` = #{number,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      department_id = #{department_id,jdbcType=INTEGER},
+      qq = #{qq,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

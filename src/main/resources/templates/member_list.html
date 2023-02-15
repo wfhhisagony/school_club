@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--Thymeleaf 提供 th:with 属性声明局部变量，其语法与属性值分配类似：-->
+<!--相当于重命名， 这里使得‘文章管理’赋值给title， 'article'赋值给active-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='成员管理',active='article'">
+<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<body class="fixed-left">
+<div id="wrapper">
+    <!--header-body是框架页面-->
+    <div th:replace="admin/header::header-body"></div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">成员管理</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-striped table-bordered">
+                            <!--先写出字段名称, thead嘛，就是head-->
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>部门</th>
+                                <th>姓名</th>
+                                <th>学号</th>
+                                <th>性别</th>
+                                <th>专业</th>
+                                <th>职位</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <!--tbody就是body，那就是真正的数据库的值-->
+                            <tbody>
+                            <th:block th:each="post : ${members}">
+                                <tr th:cid="${post.id}">
+                                    <!--<td>-->
+                                    <!--    <a th:href="@{'/admin/article/'+${post.cid}}" th:text="${post.title}"></a>-->
+                                    <!--</td>-->
+                                    <td><th:block th:text="${post.id}"/></td>
+                                    <td><th:block th:text="${post.department_name}"/></td>
+                                    <td><th:block th:text="${post.user_name}"/></td>
+                                    <td><th:block th:text="${post.user_number}"/></td>
+                                    <td><th:block th:text="${post.gender}"/></td>
+                                    <td><th:block th:text="${post.class_name}"/></td>
+                                    <td>
+                                        <!--<th:block th:if="${post.status == 'publish'}">-->
+                                        <span class="label label-success" th:text="${post.position_name}">无</span>
+                                        <!--</th:block>-->
+                                       <!--<th:block th:if="${post.status == 'draft'}">-->
+                                       <!--    <span class="label label-default">草稿</span>-->
+                                       <!--</th:block>-->
+                                    </td>
+                                    <td style="display:flex">
+                                        <a th:href="@{'/admin/member/detail/'+${post.id}}"
+                                           class="btn btn-primary btn-sm waves-effect waves-light m-b-5" target="_blank">
+                                            <i class="fa fa-edit"></i> <span>查看</span>
+                                        </a>
+                                    <th:block th:if="${session.loginUser.getPosition_id() == 1 || session.loginUser.getPosition_id() == 2}">
+                                        <!--list-style:none 去掉无序列表最前面的小点-->
+                                        <li class="dropdown" style="list-style: none;">
+                                            <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" data-toggle="dropdown"
+                                               aria-expanded = "true">
+                                                <i class="fa fa-rocket"></i><span>提拔</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(3,'+${post.id}+')'"><i class="fa fa-check"></i> 组织部部长</a></li>
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(4,'+${post.id}+')'"><i class="fa fa-check"></i> 组织部副部长</a></li>
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(5,'+${post.id}+')'"><i class="fa fa-check"></i> 宣传部部长</a></li>
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(6,'+${post.id}+')'"><i class="fa fa-check"></i> 宣传部副部长</a></li>
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(7,'+${post.id}+')'"><i class="fa fa-check"></i> 外联部部长</a></li>
+                                                <li><a href="javascript:void(0)" th:onclick="'elevate(8,'+${post.id}+')'"><i class="fa fa-check"></i> 外联部副部长</a></li>
+                                                <!--<li><a th:href="@{/user/login}"><i class="fa fa-check"></i> 注销</a></li>-->
+                                            </ul>
+                                        </li>
+                                    </th:block>
+
+                                        <!--<a class="btn btn-warning btn-sm waves-effect waves-light m-b-5"-->
+                                        <!--   target="_blank">-->
+                                        <!--    <i class="fa fa-rocket"></i> <span>提拔</span>-->
+                                        <!--</a>-->
+                                        <a href="javascript:void(0)" th:onclick="'transferPos('+${post.id}+');'"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-pencil"></i> <span>转让</span>
+                                        </a>
+                                        <th:block th:if="${(session.loginUser.getPosition_id() == 1 || session.loginUser.getPosition_id() == 2) && post.position_name.contains('部长')}">
+                                            <a href="javascript:void(0)" th:onclick="'dismiss('+${post.id}+');'"
+                                               class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                    class="fa fa-trash-o"></i> <span>撤职</span>
+                                            </a>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                            </th:block>
+
+                            </tbody>
+                        </table>
+                        <!--<div th:replace="comm/macros :: pageAdminNav(${articles})"></div>-->
+                    </div>
+                </div>
+                <div th:replace="admin/footer :: footer-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/footer :: footer"></div>
+<script type="text/javascript">
+    /*<![CDATA[*/
+    var tale = new $.tale();
+    function transferPos(id) {
+        tale.alertConfirm({
+            title:'确定转让吗?',
+            then: function () {
+                tale.post({
+                    url : '/admin/position/transfer',
+                    data: {id: id},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('转让成功');
+                        } else {
+                            tale.alertError(result.msg || '转让失败');
+                        }
+                    }
+                });
+            }
+        });
+    };
+    function elevate(pos_id, user_id){
+        tale.alertConfirm({
+            title:'确定吗?',
+            then: function () {
+                tale.post({
+                    url : '/admin/position/elevate',
+                    data: {pos_id: pos_id, user_id: user_id},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('提拔成功');
+                        } else {
+                            tale.alertError(result.msg || '提拔失败');
+                        }
+                    }
+                });
+            }
+        });
+    };
+    function dismiss(user_id){
+        tale.alertConfirm({
+            title:'确定撤职吗?',
+            then: function () {
+                tale.post({
+                    url : '/admin/position/dismiss',
+                    data: {user_id: user_id},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('撤职成功');
+                        } else {
+                            tale.alertError(result.msg || '撤职失败');
+                        }
+                    }
+                });
+            }
+        });
+    };
+    /*]]>*/
+</script>
+</body>
+</html>

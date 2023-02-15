@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ee36b36e-20f6-4482-a4f8-0c0de7163dfd" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="thymeleaf" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="708e6e42-ad3d-4eee-85c1-a0dd8083556c" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="21dVp79LyTdGK9yjVRK9oy7qmgV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/迅雷下载/项目管理/code",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.29655173",
+    "settings.editor.selected.configurable": "fileTemplates",
+    "spring.configuration.checksum": "c13367945d5d4c91047b3b50234aa7ab"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.demo.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\templates" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\static\admin\images" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\static\user\img" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\templates\error" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="softwareDesign.entity" />
+      <recent name="com.example.demo.utils" />
+      <recent name="com.example.demo.vo" />
+      <recent name="com.example.demo.config" />
+      <recent name="com.example.demo.controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\templates" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\static\admin\images" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\static" />
+      <recent name="C:\Users\86183\Desktop\数据库课设\项目管理\版本1\src\main\resources\templates\admin" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost/member" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install -e -U" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DemoApplication (1)">
+    <configuration name="generated-requests#12" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="12" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="code" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateResources" />
+      <module name="code" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateResources" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests#12" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee36b36e-20f6-4482-a4f8-0c0de7163dfd" name="Default Changelist" comment="" />
+      <created>1638271133095</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638271133095</updated>
+      <workItem from="1638271135326" duration="19423000" />
+      <workItem from="1638292006630" duration="6550000" />
+      <workItem from="1638331741530" duration="12948000" />
+      <workItem from="1638352266062" duration="2827000" />
+      <workItem from="1638358493570" duration="856000" />
+      <workItem from="1638451107304" duration="2981000" />
+      <workItem from="1638454271721" duration="5454000" />
+      <workItem from="1638489943321" duration="1622000" />
+      <workItem from="1638514519841" duration="5979000" />
+      <workItem from="1638576494467" duration="13176000" />
+      <workItem from="1638601033445" duration="15084000" />
+      <workItem from="1638620936082" duration="5910000" />
+      <workItem from="1638662589220" duration="9272000" />
+      <workItem from="1638705239480" duration="6739000" />
+      <workItem from="1638712152489" duration="4762000" />
+      <workItem from="1638748460669" duration="2541000" />
+      <workItem from="1638777748226" duration="18286000" />
+      <workItem from="1638864471429" duration="16435000" />
+      <workItem from="1638923345333" duration="9818000" />
+      <workItem from="1638946319945" duration="1454000" />
+      <workItem from="1638948021620" duration="6326000" />
+      <workItem from="1638965747564" duration="11439000" />
+      <workItem from="1639031042927" duration="21608000" />
+      <workItem from="1639094492878" duration="7966000" />
+      <workItem from="1639182939322" duration="8944000" />
+      <workItem from="1639197216600" duration="980000" />
+      <workItem from="1639268673605" duration="12564000" />
+      <workItem from="1639309469316" duration="3202000" />
+      <workItem from="1639383228988" duration="1602000" />
+      <workItem from="1639471078166" duration="2215000" />
+      <workItem from="1639474040906" duration="600000" />
+      <workItem from="1639481585420" duration="1743000" />
+      <workItem from="1639544212639" duration="3118000" />
+      <workItem from="1639702044862" duration="878000" />
+      <workItem from="1639703794462" duration="2826000" />
+      <workItem from="1639713154199" duration="579000" />
+      <workItem from="1639713854565" duration="2478000" />
+      <workItem from="1639716388156" duration="258000" />
+      <workItem from="1639724491157" duration="9136000" />
+      <workItem from="1639752559804" duration="3914000" />
+      <workItem from="1640158541782" duration="536000" />
+      <workItem from="1676334501660" duration="2094000" />
+      <workItem from="1676449178783" duration="1556000" />
+      <workItem from="1676459427954" duration="2264000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.thymeleaf.exceptions.TemplateInputException" package="org.thymeleaf.exceptions" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="theMM" language="JAVA" />
+        <watch expression="src_list.get(0).equals(&quot;&quot;)" language="JAVA" />
+        <watch expression="src_list.get(0).isEmpty()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

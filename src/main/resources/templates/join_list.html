@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--Thymeleaf 提供 th:with 属性声明局部变量，其语法与属性值分配类似：-->
+<!--相当于重命名， 这里使得‘文章管理’赋值给title， 'article'赋值给active-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='人员审核',active='join'">
+<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<body class="fixed-left">
+<div id="wrapper">
+    <!--header-body是框架页面-->
+    <div th:replace="admin/header::header-body"></div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">人员审核</h4>
+                    </div>
+                    <div class="col-md-12" style="overflow-x: auto;">
+                        <table class="table table-striped table-bordered" >
+                            <!--先写出字段名称, thead嘛，就是head-->
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>姓名</th>
+                                <th>学号</th>
+
+                                <th>性别</th>
+
+                                <th>专业</th>
+                                <th>部门id</th>
+                                <th>QQ</th>
+
+                                <th>电话</th>
+                                <th>申请时间</th>
+
+                                <th>简介</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <!--tbody就是body，那就是真正的数据库的值-->
+                            <tbody>
+                            <th:block th:each="post : ${joins}">
+                                <tr th:cid="${post.id}">
+                                    <td><th:block th:text="${post.id}"/></td>
+                                    <td><th:block th:text="${post.user_name}"/></td>
+                                    <td><th:block th:text="${post.user_number}"/></td>
+                                    <td><th:block th:text="${post.gender}"/></td>
+                                    <td><th:block th:text="${post.class_name}"/></td>
+                                    <td><th:block th:text="${post.department_id}"/></td>
+                                    <td><th:block th:text="${post.qq}"/></td>
+                                    <td><th:block th:text="${post.telephone}"/></td>
+                                    <td><th:block th:text="${#calendars.format(#calendars.createForTimeZone(#calendars.year(post.creat_time), #calendars.month(post.creat_time), #calendars.day(post.creat_time), #calendars.hour(post.creat_time), #calendars.minute(post.creat_time),'UTC'), 'yyyy-MM-dd HH:mm')}"/></td>
+                                    <td style="max-width:110px; overflow: hidden; text-overflow: ellipsis; white-space:nowrap"><th:block th:text="${post.profile}"/></td>
+                                    <td>
+                                        <a href="javascript:void(0)" th:onclick="'addPost('+${post.id}+');'"
+                                           class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-save"></i> <span>通过</span></a>
+                                        <a href="javascript:void(0)" th:onclick="'delPost('+${post.id}+');'"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-trash-o"></i> <span>拒绝</span></a>
+                                        <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" th:href="@{'/admin/join/detail/'+${post.id}}"
+                                           target="_blank"><i
+                                                class="fa fa-rocket"></i> <span>查看</span></a>
+                                    </td>
+                                </tr>
+                            </th:block>
+
+                            </tbody>
+                        </table>
+                        <!--<div th:replace="comm/macros :: pageAdminNav(${articles})"></div>-->
+                    </div>
+                </div>
+                <div th:replace="admin/footer :: footer-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/footer :: footer"></div>
+<script type="text/javascript">
+    /*<![CDATA[*/
+    var tale = new $.tale();
+    function delPost(id) {
+        tale.alertConfirm({
+            title:'确定拒绝吗?',
+            then: function () {
+                tale.post({
+                    url : '/admin/join',
+                    data: {id: id, yn: false},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('已拒绝');
+                        } else {
+                            tale.alertError(result.msg || '拒绝失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
+    function addPost(id) {
+        tale.alertConfirm({
+            title:'确定通过吗?',
+            then: function () {
+                tale.post({
+                    url : '/admin/join',
+                    data: {id: id, yn:true},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('通过成功');
+                        } else {
+                            tale.alertError(result.msg || '通过失败');
+                        }
+                    }
+                });
+            }
+        });
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

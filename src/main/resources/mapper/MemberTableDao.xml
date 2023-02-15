@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.MemberTableDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.MemberTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="position_id" jdbcType="INTEGER" property="position_id" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    <result column="user_number" jdbcType="VARCHAR" property="user_number" />
+    <result column="class_name" jdbcType="VARCHAR" property="class_name" />
+    <result column="department_id" jdbcType="INTEGER" property="department_id" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="in_club" jdbcType="TINYINT" property="in_club" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creat_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, position_id, gender, user_name, user_number, `class_name`, department_id, profile,
+    telephone, in_club, creat_time, update_time, qq, `password`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from member_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.demo.entity.MemberTable" useGeneratedKeys="true">
+    insert into member_table (position_id, gender, user_name,
+      user_number, `class_name`, department_id,
+      profile, telephone, in_club,
+      creat_time, update_time, qq,
+      `password`)
+    values (#{position_id,jdbcType=INTEGER}, #{gender,jdbcType=TINYINT}, #{user_name,jdbcType=VARCHAR},
+      #{user_number,jdbcType=VARCHAR}, #{class_name,jdbcType=VARCHAR}, #{department_id,jdbcType=INTEGER},
+      #{profile,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{in_club,jdbcType=TINYINT},
+      #{creat_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, #{qq,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.demo.entity.MemberTable" useGeneratedKeys="true">
+    insert into member_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="position_id != null">
+        position_id,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="user_name != null">
+        user_name,
+      </if>
+      <if test="user_number != null">
+        user_number,
+      </if>
+      <if test="class_name != null">
+        `class_name`,
+      </if>
+      <if test="department_id != null">
+        department_id,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="in_club != null">
+        in_club,
+      </if>
+      <if test="creat_time != null">
+        creat_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="position_id != null">
+        #{position_id,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="user_name != null">
+        #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_number != null">
+        #{user_number,jdbcType=VARCHAR},
+      </if>
+      <if test="class_name != null">
+        #{class_name,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        #{department_id,jdbcType=INTEGER},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="in_club != null">
+        #{in_club,jdbcType=TINYINT},
+      </if>
+      <if test="creat_time != null">
+        #{creat_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.MemberTable">
+    update member_table
+    <set>
+      <if test="position_id != null">
+        position_id = #{position_id,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="user_name != null">
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_number != null">
+        user_number = #{user_number,jdbcType=VARCHAR},
+      </if>
+      <if test="class_name != null">
+        `class_name` = #{class_name,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        department_id = #{department_id,jdbcType=INTEGER},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="in_club != null">
+        in_club = #{in_club,jdbcType=TINYINT},
+      </if>
+      <if test="creat_time != null">
+        creat_time = #{creat_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.MemberTable">
+    update member_table
+    set position_id = #{position_id,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=TINYINT},
+      user_name = #{user_name,jdbcType=VARCHAR},
+      user_number = #{user_number,jdbcType=VARCHAR},
+      `class_name` = #{class_name,jdbcType=VARCHAR},
+      department_id = #{department_id,jdbcType=INTEGER},
+      profile = #{profile,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      in_club = #{in_club,jdbcType=TINYINT},
+      creat_time = #{creat_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      qq = #{qq,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryUserByName" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List" />
+     from member_table
+     where name = #{name}
+  	</select>
+  <select id="queryUserByQQ" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List" />
+    from member_table
+    where qq = #{qq}
+  </select>
+    <select id="getAllMemberList" resultType="com.example.demo.entity.MemberTable">
+      select * from member_table
+    </select>
+    <select id="getInClubMemberList" resultType="com.example.demo.entity.MemberTable">
+      select * from member_table
+      where in_club = 1
+    </select>
+  <select id="getJoinClubMemberList" resultType="com.example.demo.entity.MemberTable">
+      select * from member_table
+      where in_club = 2
+  </select>
+  <select id="getPastMemberList" resultType="com.example.demo.entity.MemberTable">
+      select * from member_table
+      where in_club = 0
+  </select>
+</mapper>

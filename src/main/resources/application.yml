@@ -1,0 +1,62 @@
+#mybatis:
+#    mapper-locations: classpath:mapper/*xml
+#    type-aliases-package: com.example.demo.entity
+#    configuration:
+#        map-underscore-to-camel-case: true  # 使用驼峰命名
+# mp xml 路径
+mybatis-plus:
+    configuration:
+        map-underscore-to-camel-case: false # 非驼峰命名
+        auto-mapping-behavior: full
+        type-aliases-package: com.example.demo.entity
+        #    mybatis-plus logger配置
+        #我们所有的sql在mybatisplus是不可见的,所以在开发中需要配置日志,开发完成后,就可以取消日志了,因为日志也是损耗资源的
+        #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #仅控制台输出的日志
+        log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl   #使用log4j输入到文件
+
+    mapper-locations: classpath:mapper/*xml
+    global-config:
+        # 逻辑删除
+        db-config:
+            logic-not-delete-value: 1
+            logic-delete-value: 0
+
+server:
+    port: 8080
+spring:
+    application:
+        name: demo
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        name: defaultDataSource
+        password: 'root'
+        url: jdbc:mysql://localhost:3306/my_club?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+        username: 'root'
+    thymeleaf:
+        cache: false  # 改为flase
+        check-template: true
+        check-template-location: true
+        content-type: text/html
+        enabled: true
+        encoding: UTF-8
+        excluded-view-names: ''
+        mode: HTML
+        prefix: classpath:/templates/
+        suffix: .html
+    # 并设置返回的json日期格式
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        serialization:
+            write-dates-as-timestamps: false
+
+    #默认路径虽然是在static下，但并没有包含static 下的各个文件夹，因此当我们把静态文件移入这些文件夹后，spring boot就不认识了
+    # 这个没用,改用th来访问吧<a th:href="@{/user/login}">登录</a>
+#    mvc:
+#        # 定义匹配静态资源路径
+#        static-path-pattern: /**
+#    resources:
+#        # 定义静态资源位置
+#        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+#
+

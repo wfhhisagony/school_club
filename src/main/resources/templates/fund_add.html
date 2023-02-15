@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='添加经费条目',active='add_fund'">
+<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<link th:href="@{/admin/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
+<link th:href="@{/admin/plugins/select2.dist.css/select2-bootstrap.css}" rel="stylesheet"/>
+<link th:href="@{/admin/plugins/toggles/toggles.css}" rel="stylesheet"/>
+
+<link href="//cdn.bootcss.com/multi-select/0.9.12/css/multi-select.css" rel="stylesheet"/>
+<link href="//cdn.bootcss.com/select2/3.4.8/select2.min.css" rel="stylesheet"/>
+<link th:href="@{/admin/plugins/md/css/style.css}" rel="stylesheet"/>
+<style>
+    #tags_tagsinput {
+        background-color: #fafafa;
+        border: 1px solid #eeeeee;
+    }
+
+    #tags_addTag input {
+        width: 100%;
+    }
+
+    #tags_addTag {
+        margin-top: -5px;
+    }
+</style>
+<body class="fixed-left">
+<div id="wrapper">
+        <div th:replace="admin/header::header-body"></div>
+        <div class="content-page">
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">
+                                添加经费条目
+                            </h3>
+                        </div>
+                        <!--隐藏input传值-->
+                        <!--<input type="hidden" name="allowComment"-->
+                        <!--       th:value="${contents!=null and contents.allowComment !=null}?${contents.allowComment}: true"-->
+                        <!--       id="allow_comment"/>-->
+
+
+                        <div class="col-md-12">
+                            <form id="articleForm" role="form" novalidate="novalidate">
+                                <div class="form-group col-md-3 col-sm-4">
+                                    <label class="col-sm-4">类型</label>
+                                    <div class="col-sm-8" style="display:flex;">
+                                        <!--<div th:class="allow-true"-->
+                                        <input type="radio" name="type" value="0" title="收入" checked="">
+                                        <div>收入</div>
+                                        <input type="radio" name="type" value="1" title="支出">
+                                        <div>支出</div>
+                                        <!--<div class="toggle toggle-success allow-true"-->
+                                        <!--     onclick="allow_comment(this);"></div>-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6" style="padding: 0 10px 0 0;">
+                                    <input type="text" class="form-control" placeholder="请输入金额(必须)" name="amount"
+                                           required="required"
+                                           aria-required="true"/>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                <textarea style="height: 450px" autocomplete="off" id="text" name="detail" class="markdown-textarea">
+                                </textarea>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                            onclick="addFund();">
+                                        添加条目
+                                    </button>
+                                    <a class="btn btn-default waves-effect waves-light" th:href="@{/admin/fund}">返回列表</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div th:replace="admin/footer :: footer-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div th:replace="admin/footer :: footer"></div>
+<script type="text/javascript">
+    var tale = new $.tale();
+    function addFund(){
+        //通过调用的按钮找到此id的标签，获取里面input标签，name属性为title的
+        var title = $('#articleForm input[name=title]').val();
+        var content = $('#text').val();
+        if (title == '') {
+            tale.alertWarn('请输入条目标题');
+            return;
+        }
+        if (content == '') {
+            tale.alertWarn('请输入条目内容');
+            return;
+        }
+        // 设置 第一个匹配id=content-editor的属性 value=content。
+        // $('#content-editor').val(content);
+        // $("#articleForm #status").val(status);
+        // $("#articleForm #categories").val($('#multiple-sel').val());
+        var params = $("#articleForm").serialize();
+        console.log(params);
+        var url = '/admin/fund/add';
+        tale.post({
+            url:url,
+            data:params,
+            success: function (result) {
+                if (result && result.success) {
+                    tale.alertOk({
+                        text:'添加成功',
+                        then: function () {
+                            setTimeout(function () {
+                                window.location.href = '/admin/fund';
+                            }, 500);
+                        }
+                    });
+                } else {
+                    tale.alertError(result.msg || '添加失败');
+                }
+            }
+        });
+    };
+</script>
+<script th:src="@{/admin/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
+<script th:src="@{/admin/plugins/jquery-multi-select/jquery.quicksearch.js}"></script>
+<script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
+<script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>
+<script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
+<script th:src="@{/admin/js/article.js}"></script>
+</body>
+</html>
